@@ -4,7 +4,7 @@
 - **Objectif :** utilisé pour stubbing ou Mocker un comportement particulier de la méthode.
 - **Ce qu'il fait :** Permet de spécifier une valeur de retour ou une exception lorsqu'une méthode particulière est appelée avec certains arguments.
 - **Quand l'utiliser :** 
-  - Lorsque je dois Mocker un comportement spécifique ou le résultat d'un appel de méthode.
+  - Lorsque je dois Mocker un comportement spécifique ou le résultat d'un appel de méthode. (simuler un comportement)
   - Lorsque je ne veux pas savoir si une méthode est appelée ou non, mais que je veux contrôler sa sortie lorsqu'elle est appelée.
 
 ```java
