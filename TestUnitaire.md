@@ -1,4 +1,16 @@
 # Mockito
+## @Mock
+Est utilisée pour créer un objet fictif pour une classe particulière
+## @InjectMocks
+Est utilisée pour injecter l'objet fictif dans le Mock
+
+Si il y a @InjectMocks alors il faut utiliser  @BeforeEach : 
+```java
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+```
 
 ## when()
 - **Objectif :** utilisé pour stubbing ou Mocker un comportement particulier de la méthode.
@@ -10,6 +22,8 @@
 ```java
 when(mockedList.get(0)).thenReturn("firstElement");
 ```
+### thenReturn()
+Est utilisée pour spécifier ce que doit retourner un mock lorsque celle-ci est appelée.
 
 ## verify()
 - **Objectif :** utilisé pour la vérification des appels de méthode sur des objets fictifs.
@@ -22,3 +36,28 @@ when(mockedList.get(0)).thenReturn("firstElement");
 mockedList.add("one");
 verify(mockedList).add("one");
 ```
+
+## eq()
+- La méthode eq() dans Mockito est utilisée pour matcher un argument exact dans les appels de méthode sur un mock.
+- L'utilisation de eq() est une manière de spécifier que ces paramètres sont exactement ceux que j'ai defini dans le test.
+
+### Pourquoi utiliser eq() ?
+- Par défaut, Mockito essaie de faire correspondre les arguments d'un appel de méthode en fonction de leur type. Mais dans certains cas, cela peut ne pas être suffisant si vous voulez que l'argument soit exactement égal à un certain objet ou une valeur précise.
+- eq() est utilisé pour s'assurer que les arguments qui sont passés au mock correspondent exactement à ceux que vous avez définis dans le test. Si vous n'utilisez pas eq(), Mockito pourrait tenter de faire une comparaison plus large qui ne vérifierait pas l'exactitude des valeurs. Cela pourrait entraîner des erreurs ou des tests qui ne reflètent pas la réalité du code.
+
+
+## consumeWith()
+- Permet d'afficher la réponse de expectBody()
+```java
+result.expectStatus().isOk()
+              .expectBody()
+              .consumeWith(response -> {
+                  // Afficher le corps de la réponse dans la console
+                  String responseBody = new String(response.getResponseBody());
+                  System.out.println("Response Body: " + responseBody);
+              });
+```
+²
+
+## FAIRE ATTENTION : 
+Si ```@WebFluxTest(controllers = nomducontroller.class)``` est présent alors ça ne sert à rien de @Mock le controller (TU non pris en compte par sonar)
